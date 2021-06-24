@@ -1,11 +1,15 @@
 package com.leandro.personapi.controller;
 
 import com.leandro.personapi.dto.MessageResponseDTO;
+import com.leandro.personapi.dto.PersonDTO;
+import com.leandro.personapi.dto.PhoneDTO;
 import com.leandro.personapi.entity.Person;
 import com.leandro.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 // Define a classe como um Controller, e define a rota correspondente
@@ -21,13 +25,15 @@ public class PersonController {
     }
 
     @GetMapping
-    public String getAll() {
+    public List<> getAll() {
         return "Lista de Pessoas: ";
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody Person person) {
-        return personService.createPerson(person);
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) {
+        return personService.createPerson(personDTO);
     }
+
+
 }
