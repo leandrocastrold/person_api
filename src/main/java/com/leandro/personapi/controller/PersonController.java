@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 // Define a classe como um Controller, e define a rota correspondente
@@ -25,8 +26,8 @@ public class PersonController {
     }
 
     @GetMapping
-    public List<> getAll() {
-        return "Lista de Pessoas: ";
+    public List<PersonDTO> listAll() {
+        return personService.listAll();
     }
 
     @PostMapping
