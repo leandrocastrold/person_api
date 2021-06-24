@@ -4,6 +4,7 @@ import com.leandro.personapi.dto.MessageResponseDTO;
 import com.leandro.personapi.dto.PersonDTO;
 import com.leandro.personapi.dto.PhoneDTO;
 import com.leandro.personapi.entity.Person;
+import com.leandro.personapi.exceptions.PersonNotFoundException;
 import com.leandro.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,11 +31,18 @@ public class PersonController {
         return personService.listAll();
     }
 
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable int id) throws PersonNotFoundException {
+
+        return personService.findById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) {
         return personService.createPerson(personDTO);
     }
+
 
 
 }

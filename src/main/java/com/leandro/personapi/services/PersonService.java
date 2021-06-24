@@ -5,8 +5,10 @@ import com.leandro.personapi.dto.PersonDTO;
 import com.leandro.personapi.dto.PhoneDTO;
 import com.leandro.personapi.entity.Person;
 import com.leandro.personapi.entity.Phone;
+import com.leandro.personapi.exceptions.PersonNotFoundException;
 import com.leandro.personapi.mapper.PersonMapper;
 import com.leandro.personapi.repository.PersonRepository;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,11 @@ public class PersonService {
     return (List<PersonDTO>) people.stream()
             .map(personMapper::toDTO)
             .collect(Collectors.toList());
+    }
+
+    public PersonDTO findById(int id) throws PersonNotFoundException {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+        return  personMapper.toDTO(person);
     }
 }
