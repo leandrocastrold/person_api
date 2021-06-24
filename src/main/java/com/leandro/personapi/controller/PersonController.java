@@ -20,6 +20,11 @@ public class PersonController {
         this.personService = personService;
     }
 
+    @GetMapping
+    public String getAll() {
+        return "Lista de Pessoas: ";
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO createPerson(@RequestBody Person person) {
