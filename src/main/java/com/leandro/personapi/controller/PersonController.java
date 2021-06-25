@@ -39,7 +39,7 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) {
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) throws Exception {
         return personService.createPerson(personDTO);
     }
 
