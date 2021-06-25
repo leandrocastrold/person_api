@@ -47,9 +47,26 @@ public class PersonService {
             .collect(Collectors.toList());
     }
 
-    public PersonDTO findById(int id) throws PersonNotFoundException {
+    public PersonDTO findById(int id)  throws PersonNotFoundException{
+        Person person = verifyIfPersonExists(id);
+        return personMapper.toDTO(person);
+    }
+
+    public void deleteById(int id) throws PersonNotFoundException {
+        verifyIfPersonExists(id);
+        personRepository.deleteById(id);
+    }
+//
+//    public MessageResponseDTO updatePerson(int id, PersonDTO personDTO) {
+//        Person person = personRepository.getById(id);
+//        Person PersonData = personMapper.toModel(personDTO);
+//        person.set
+//        personRepository.
+//    }
+
+    private Person verifyIfPersonExists(int id) throws PersonNotFoundException {
         Person person = personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
-        return  personMapper.toDTO(person);
+        return  person;
     }
 }

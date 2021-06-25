@@ -43,6 +43,18 @@ public class PersonController {
         return personService.createPerson(personDTO);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePerson(@PathVariable int id) throws PersonNotFoundException {
+        personService.deleteById(id);
+    }
+//
+//    @PutMapping
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public MessageResponseDTO updadePerson(int id, PersonDTO personDTO) {
+//        personService.updatePerson(id, personDTO);
+//    }
+
 
 
 }
