@@ -6,6 +6,7 @@ import com.leandro.personapi.dto.PhoneDTO;
 import com.leandro.personapi.entity.Person;
 import com.leandro.personapi.exceptions.PersonNotFoundException;
 import com.leandro.personapi.services.PersonService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +18,10 @@ import java.util.List;
 // Define a classe como um Controller, e define a rota correspondente
 @RestController
 @RequestMapping("/api/v1/people")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
-    @Autowired
     private PersonService personService;
-
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
 
     @GetMapping
     public List<PersonDTO> listAll() {
